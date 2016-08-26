@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+ <suite name="AllSuites"  parallel="false" preserve-order="true">
+  <suite-files>
+  <!--<suite-file path="ASPEnPrerequisite.xml" />
+  <suite-file path="ASPEnIntegartion.xml" /> -->
+  <suite-file path="Admin.xml" />
+  <!--<suite-file path="Upload.xml" />      
+  <suite-file path="StorageDownload.xml" /> 
+  <suite-file path="View.xml" /> 
+  <suite-file path="Search.xml" />
+  <suite-file path="Users.xml" />
+  <suite-file path="ASPEnCustomerRolesAPI.xml" />
+  <suite-file path="ASPEnCreateGroup.xml" />   
+  <suite-file path="ASPEnAdminStats.xml" />
+  <suite-file path="ExchangeRepository.xml" />    
+  <suite-file path="AspenSDKupload.xml" /> 
+  <suite-file path="ECA.xml" />-->
+
+<!-- 
+  <suite-file path="DataIntegrity.xml" />
+  <suite-file path="Idol_Vertica_Comparison.xml" /> 
+  <suite-file path="Analytics.xml" />
+ -->
+
+ </suite-files>  
+         
+   <listeners>
+   <listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+  <listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+  <listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+  
+    <listener class-name="com.test.TestMethodListener"></listener>
+    <listener class-name="com.test.TestSuiteListener"></listener>
+	<listener class-name="com.test.MyReporter"></listener>
+  </listeners> 
+  
+
+  
+</suite>
+   

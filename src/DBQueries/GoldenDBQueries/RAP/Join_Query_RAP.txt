@@ -1,0 +1,38 @@
+select
+sc.ID as SinglecastID,
+sc.RequestDate as SentDate,
+sc.Direction,
+sc.IsFlagged as MsgStatus,
+sc.ReviewStatus,
+sc.ContentType,
+--sc.MessageID,
+sc.NumAttachments as NoOfAttachments,
+sc.MessageSize,
+sc.SenderDisplayName as FromSender,
+sc.RecipientDisplayName as ToRecipient,
+sc.Subject,
+sc.BaseSubjectHash,
+sc.hasUnDisclRecip,
+sc.EmailOriginatorID as MessageType,
+--case when sc.RULEID IS NULL then NULL else scr.name end as Policy,
+--case when sc.RULEID IS NULL then NULL else scaux.value end as Term,
+scb.CompressedNote as CompressedBody,
+sca.Hash,
+case when fwd.SinglecastID is NULL then 0 else 1 end as Forwarded,
+sc.LabelID, 
+tsl.LITERAL_TEXT as LabelName,
+--sc.ArchiveDate,
+
+sc.IsEncrypted 
+
+into [GOLD_RAP].[dbo].[comparetable]
+
+from [QASIB1].[dbo].[Singlecast] sc with (nolock)
+inner join [QASIB1].[dbo].ImportSinglecastIDGen sca with (nolock) on sc.ID = sca.SinglecastID 
+left outer join 
+[QASIB1].[dbo].[SinglecastBody] scb  on sc.ID = scb.ID 
+left outer join [QASIB1].[dbo].[SCRule] scr on sc.RuleID=scr.ID 
+left outer join [QASIB1].[dbo].[TBL_SYSTEM_LITERAL] tsl on sc.LabelID = tsl.LITERAL_ID 
+left outer join
+[QASIB1].[dbo].[SCCase_Xref] fwd  on sc.ID = fwd.SinglecastID
+left outer join [QASIB1].[dbo].[SCAuxInfo] scaux on (sc.ID=scaux.SinglecastID and scr.ID=scaux.RuleID)

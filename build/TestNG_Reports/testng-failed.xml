@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Rev-Queue-Search Suite]">
+  <parameter name="config-file" value="conf/APITest.properties/"/>
+  <listeners>
+    <listener class-name="atu.testng.reports.listeners.ATUReportsListener"/>
+    <listener class-name="atu.testng.reports.listeners.ConfigurationListener"/>
+    <listener class-name="atu.testng.reports.listeners.MethodListener"/>
+    <listener class-name="com.test.TestMethodListener"/>
+    <listener class-name="com.test.TestSuiteListener"/>
+    <listener class-name="com.test.MyReporter"/>
+  </listeners>
+  <test name="ReviewQueue Search(failed)">
+    <classes>
+      <class name="test1.TestReviewQueueResults">
+        <methods>
+          <include name="logintoSupervisor"/>
+          <include name="bsuite"/>
+          <include name="testReviewQueueSearchResults" invocation-numbers="4 5 7"/>
+        </methods>
+      </class> <!-- test1.TestReviewQueueResults -->
+    </classes>
+  </test> <!-- ReviewQueue Search(failed) -->
+</suite> <!-- Failed suite [Rev-Queue-Search Suite] -->

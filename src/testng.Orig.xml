@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Supervisor Views Suite">
+  <parameter name="config-file" value="conf/APITest.properties/"/>
+  <test name="Supervisor-Search_Views">
+    <classes>
+       <!-- <class name="phantomjs.Retention" ></class> -->
+       <!--	<class name="phantomjs.PhanthomJsTest" ></class> -->
+       <!-- <class name="S6Search.S6SearchTest" ></class> -->
+       <!-- <class name="test1.TestDSSearchResults" ></class> -->
+	   <class name="test1.TestCompSearchResults" ></class>
+       <!-- <class name="test1.TestCompareDB" ></class> -->
+       <!-- <class name="test1.TestCompareViewDB" ></class> -->
+      
+    </classes>
+  </test>
+<!--  <listeners>
+   <listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+  <listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+  <listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+  </listeners> -->
+</suite>

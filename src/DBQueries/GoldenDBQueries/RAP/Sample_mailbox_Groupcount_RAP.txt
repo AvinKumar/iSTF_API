@@ -1,0 +1,3 @@
+Select UserGroupID, sum(NumberMessagesSampled)as 'SampledMailboxGroup',Name as 'UserGroupName'
+INTO [GOLD_RAP].[dbo].[sampledmailbox]
+from [QASIB1].[dbo].[ActivityFactGroup] inner join [QASIB1].[dbo].[UserGroup] on UserGroupId=ID group by Name,UserGroupID order by Name

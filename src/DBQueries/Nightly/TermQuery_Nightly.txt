@@ -1,0 +1,4 @@
+select a.Value, a.FieldID, a.RuleID, r.name 
+INTO [COMPARED_NP].[dbo].[term]
+from [QASIB1].[dbo].[SCAuxInfo] a with (nolock) join [QASIB1].[dbo].[SCRule] r with (nolock) on r.id=a.ruleid
+order by r.name,a.value

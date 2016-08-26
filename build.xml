@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author: Avin --> 
+
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+
+<project name="SupervisorAPI" default="test" basedir="."> <!-- dot indicates that basedir is pointing towards project root directory -->
+
+<!-- ========== Define <testng> task =================================== -->
+
+	<taskdef name="testng" classname="org.testng.TestNGAntTask">
+		
+		<classpath>
+			<pathelement location="lib/testng-6.8.jar"/>
+		</classpath>
+		
+	</taskdef>
+
+<!-- ========== Initialize Properties =================================== --> 
+	<property name="builddir" location="build" />
+	<property name="srcdir" location="src" />
+	<property name="libdir" location="lib" />
+	<property name="full-compile" value="true" />
+  
+<!-- ====== For setting the classpath =================================== -->  
+	<path id="classpath.base"/>
+	<path id="classpath.test">
+   
+	<fileset dir="${libdir}">
+		<include name="**/*.jar" />
+	</fileset>
+   
+	<pathelement location="${builddir}" />
+	<pathelement location="${srcdir}" />
+   
+	<path refid="classpath.base" />
+	
+	</path>
+   
+<!-- ====== Cleaning the destination folders ============================ -->
+	<target name="clean" >
+    
+		<!--	<delete verbose="${full-compile}"> -->
+		<delete dir="${builddir}"/>
+		<!--	<fileset dir="${builddir}"  includes="*" /> --> <!-- (includes="**/*.*") To delete only files present in build folder --> 
+		<echo message="Deleted...!!!"/>	
+		
+	</target>
+   
+ <!-- ====== Compile the java files in src folder ======================= -->
+    <target name="compile" depends="clean">
+   	
+	<echo message="Creating a new build directory"/>
+	<mkdir dir="${builddir}"/>
+	
+	<echo message="Compiling...!!!"/>
+		<javac srcdir="${srcdir}" destdir="${builddir}" verbose="${full-compile}" includeantruntime="false">
+        <classpath refid="classpath.test"/>
+		</javac>
+			
+	</target>
+	
+<!-- ====== Generating the ISTFCore.jar file ======================= -->	
+	<target name="dist" depends="compile"
+          description="Creating Jar file for binary distribution">
+    <jar jarfile="${builddir}/ISTFCore.jar"
+         basedir="${builddir}"/>
+  </target>
+   
+<!-- ==== Execution of Test Suite based on testng xml input classes === -->  
+	<target name="test" depends="compile">
+		<echo message="Relax...!!! Execution will begin now."/>
+		<testng outputdir="${builddir}/TestNG_Reports" classpathref="classpath.test"> 
+        <xmlfileset dir="${srcdir}" includes="testng.xml"/> 
+		</testng>
+		
+	</target>
+  
+<!-- Execution of Test Suite and sending email notification about the Execution report. This uses ./Reporting/Utils.java class and the ./conf/Reporting.properties files -->
+<!-- Uses ISTFCore.jar file -->
+	<target name="report" depends="test" >
+    <echo message="Execution of the Automation suite is completed. The report will be sent to the email distribution lists."/>   
+	   <java classname="com.hp.test.framework.Reporting.Utlis" classpathref="classpath.test">
+             <arg value=""/>
+       </java>
+      
+    </target>  
+	
+</project>

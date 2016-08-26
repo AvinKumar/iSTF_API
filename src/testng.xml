@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="API(HTTP request) Automation Suite" verbose="1" parallel="false" preserve-order="true">
+ <parameter name="config-file" value="conf/APITest.properties/"/>
+ 
+ <suite-files>
+	<suite-file path="TestNG_XMLs/testng_Views.xml" />
+	<suite-file path="TestNG_XMLs/testng_AllProcessSearch.xml" />
+	<suite-file path="TestNG_XMLs/testng_ReviewQueueSearch.xml" />
+    <suite-file path="TestNG_XMLs/testng_AllProcessi18N.xml" />
+	<suite-file path="TestNG_XMLs/testng_ArchieveSearchOne.xml" />
+	<suite-file path="TestNG_XMLs/testng_ArchieveSearchTwo.xml" />
+	 
+ </suite-files> 
+
+ 
+ <listeners>
+	<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+	<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+	<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+ </listeners>
+
+<!-- Commenting out the above as there is a issue while saving the results to a folder; Ex: The folder name is getting prefixed with the number of its previous folder. Run1, Run12 instead of Run2 -->
+</suite>

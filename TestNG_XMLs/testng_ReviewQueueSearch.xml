@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Review-Queue-Search Suite" verbose="1" parallel="false" preserve-order="true">
+ <parameter name="config-file" value="conf/APITest.properties/"/>
+ 
+  <test name="RQ Search"> <!-- Edit the test name appropriately for the feautres that will be executed -->
+    <classes>
+       <class name="test1.TestReviewQueueResults" ></class>
+    </classes>
+  </test>
+
+  <!--
+<listeners>
+   <listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+  <listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+  <listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+</listeners>
+-->
+
+<!-- Commenting out the above as there is a issue while saving the results to a folder; Ex: The folder name is getting prefixed with the number of its previous folder. Run1, Run12 instead of Run2 -->
+</suite>

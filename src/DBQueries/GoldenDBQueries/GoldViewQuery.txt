@@ -1,0 +1,10 @@
+select ID,name,summary, isGlobal, IsRead,IsFlagged,NotFlagged,NotRead,searchType, isnull(status, -1) as "status_null_as_minus_one", sum(isnull(total_results,0)) as total_results
+INTO [GOLD_VIEW].[dbo].[ViewCompareTable]
+from [QASIB1].[dbo].[AuditSearch] left outer join 
+      [QASIB1].[dbo].[COMP_SEARCH_CACHE]
+on [QASIB1].[dbo].[AuditSearch].ID = [QASIB1].[dbo].[COMP_SEARCH_CACHE].Search_id
+group by ID,name,summary, isGlobal, IsRead,IsFlagged,NotFlagged,NotRead,searchType,status
+  
+  
+  
+  

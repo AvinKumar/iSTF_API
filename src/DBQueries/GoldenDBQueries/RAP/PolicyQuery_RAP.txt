@@ -1,0 +1,13 @@
+select Policy, COUNT(*) as 'MESSAGE_COUNT'
+INTO [GOLD_RAP].[dbo].[policy] 
+from
+(
+      select sc.subject, r.Name as Policy 
+      from [QASIB1].[dbo].[SCAnnotation] sca with (nolock) inner join [QASIB1].[dbo].[SCAnnotationRuleID] scar with (nolock) on sca.SCAnnotationRuleID = scar.SCAnnotationRuleID 
+                  inner join [QASIB1].[dbo].[SCRule] r with (nolock) on scar.RuleID = r.ID 
+                  inner join [QASIB1].[dbo].[Singlecast] sc on sca.SinglecastID=sc.ID 
+) as a
+group by policy
+order by policy
+
+

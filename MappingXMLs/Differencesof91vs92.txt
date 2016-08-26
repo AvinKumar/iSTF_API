@@ -1,0 +1,14 @@
+Message Status
+
+<MessageStatusOpen>rs_0</MessageStatusOpen>
+<MessageStatusPending>rs_1</MessageStatusPending>
+<MessageStatusEscalated>rs_2</MessageStatusEscalated>
+<MessageStatusClosed>rs_3</MessageStatusClosed>
+
+
+
+doubtful tags...
+<WithLabel>label</WithLabel>
+<MessageSizeOption>sizeList</MessageSizeOption>
+<PolicyAndFlag>policiesAndFlaggingOpen</PolicyAndFlag>
+<CaseFlag1>caseOpen</CaseFlag1>

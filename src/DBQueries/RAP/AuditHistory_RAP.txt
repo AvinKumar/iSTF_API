@@ -1,0 +1,22 @@
+select sca.ID as scaID, sca.SinglecastID, scac.Comment,sca.ReviewerID, rev.DisplayName as ReviewerDisplayName,rev.RoleID, role.Name as Role,
+sca.ReviewDate, sca.PreviousReviewStateID, sca.CurrentReviewStateID, sca.AssignToID, case when isNULL(scar.RuleID, 0) = 0 then ator.DisplayName 
+else atog.Name end as AssignToDisplayName, scar.RuleID, scar.RuleConditionID, sca.CaseID, scc.Name as CaseName, sca.IsAdding, scar.AttachmentID, 
+scar.UserID, scar.UserGroupID, scar.RuleLevelID, sca.OriginatorID, sca.LITERAL_ID, tsl.LITERAL_TEXT, tslt.LITERAL_TYPE_NAME, 
+scac.commentType commentType
+sid.Subject,sid.BaseSubjectHash
+
+INTO [COMPARED_RAP].[dbo].[AuditHistory]
+
+from [QASIB1].[dbo].[SCAnnotation] sca with (nolock) left outer join [QASIB1].[dbo].[SCAnnotationComments] scac with (nolock) on sca.CommentID = scac.CommentID 
+left outer join [QASIB1].[dbo].[SCAnnotationRuleID] scar with (nolock) on sca.SCAnnotationRuleID = scar.SCAnnotationRuleID 
+left outer join [QASIB1].[dbo].[SCUser] rev with (nolock) on sca.ReviewerID = rev.ID 
+left outer join [QASIB1].[dbo].[SCUser] ator with (nolock) on sca.AssignToID = ator.ID 
+left outer join [QASIB1].[dbo].[UserGroup] atog with (nolock) on sca.AssignToID = atog.ID 
+left outer join [QASIB1].[dbo].[SCCase] scc with (nolock) on sca.CaseID = scc.ID 
+left outer join [QASIB1].[dbo].[TBL_SYSTEM_LITERAL] tsl with (nolock) on tsl.LITERAL_ID = sca.LITERAL_ID 
+left outer join [QASIB1].[dbo].[TBL_SYSTEM_LITERAL_TYPE] tslt with (nolock) on tsl.LITERAL_TYPE_ID = tslt.LITERAL_TYPE_ID  
+left outer join [QASIB1].[dbo].[Role] role with (nolock) on 
+--sca.ReviewerRoleID = role.ID
+--left outer join SCAnnotationSenderNotification scasn with (nolock) on sca.SCAnnotationSenderNotificationID = scasn.SCAnnotationSenderNotificationID 
+rev.RoleID =role.ID
+left outer join [QASIB1].[dbo].[Singlecast] sid on sca.SinglecastID=sid.ID
